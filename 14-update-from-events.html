@@ -45,6 +45,8 @@
         }
       },
       methods: {
+        // 子組件若要取得父組件，可以用$parent
+        // 發送事件至父組件用 $emit
         updateText() {
           this.$parent.$emit('update', this.message);
         }
@@ -61,6 +63,7 @@
           this.message = val;
         }
       },
+      // 接受子組件傳送的事件用 $on
       mounted() {
         this.$on('update', this.selfUpdate);
       }
