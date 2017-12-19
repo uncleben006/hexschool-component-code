@@ -32,14 +32,28 @@
   <script>
 
     Vue.component('my-component', {
-      template: '<div class="component"> <span> {{ count }}</span> - <button @click="count++">add</button></div>',
-      props: ['count']
+      template: '<div class="component"> <span> {{ c }}</span> - <button @click="c++">add</button></div>',
+      props: ['count'],
+      /*****************再讀這*****************/
+      // 所以需要用data取出裡面的物件，才能作為基本型別使用，才不會指到父親物件的位址
+      data() {
+        return {
+          c: this.count.num
+        }
+      }
     });
 
+
+    /*****************先讀這*****************/
+    //當今天data帶進來的counts是一個物件時，
+    // 就不是帶入一個基本屬性而是帶入一個reference，
+    // 會指到同一個位址，也就是counts下的num身上 ( 老爸身上 )
     new Vue({
       el: '#app',
       data:{
-        counts: 0
+        counts: {
+          num: 0
+        }
       }
     });
   </script>
